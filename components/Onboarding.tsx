@@ -3,7 +3,7 @@
 import type { Swiper as SwiperInstance } from "swiper";
 import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, EffectFade } from "swiper/modules";
+import { EffectFade } from "swiper/modules";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -151,114 +151,124 @@ const Onboarding = () => {
   );
 
   return (
-    <main ref={rootRef} className="w-full relative flex flex-col min-h-screen">
-      <Background bgIntroRef={bgIntroRef} bgMainRef={bgMainRef} />
-      <Header previous={previous} restart={restart} />
-
-      <section
-        className="relative isolate flex h-full flex-col overflow-hidden gap-8 pt-36"
-        aria-label="Onboarding Juicebox"
+    <>
+      <main
+        ref={rootRef}
+        className="w-full relative flex flex-col min-h-screen max-w-112.5 mx-auto"
       >
-        <div ref={orbRef} className="relative flex mx-auto w-7/10 h-auto">
-          <OrbImage />
-        </div>
+        <Background bgIntroRef={bgIntroRef} bgMainRef={bgMainRef} />
+        <Header previous={previous} restart={restart} />
 
-        <Swiper
-          className="relative z-1 min-h-0 h-full w-full flex-1"
-          modules={[EffectFade, A11y]}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          speed={650}
-          slidesPerView={1}
-          allowTouchMove={false}
-          preventInteractionOnTransition
-          resistanceRatio={0.2}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          onSlideChange={(swiper) => {
-            setSlider(swiper.activeIndex);
-          }}
+        <section
+          className="relative isolate flex h-full flex-col overflow-hidden pt-[15vh]"
+          aria-label="Onboarding Juicebox"
         >
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="0"
-            aria-hidden={slider !== 0}
-            inert={slider !== 0}
+          <div
+            ref={orbRef}
+            className="relative flex mx-auto w-7/10 lg:max-w-55 h-auto"
           >
-            <IntroSlide />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="1"
-            aria-hidden={slider !== 1}
-            inert={slider !== 1}
-          >
-            <WalkthroughSlide index={0} active={slider === 1} />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="2"
-            aria-hidden={slider !== 2}
-            inert={slider !== 2}
-          >
-            <WalkthroughSlide index={1} active={slider === 2} />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="3"
-            aria-hidden={slider !== 3}
-            inert={slider !== 3}
-          >
-            <WalkthroughSlide index={2} active={slider === 3} />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="4"
-            aria-hidden={slider !== 4}
-            inert={slider !== 4}
-          >
-            <FormSlide
-              kind="name"
-              value={name}
-              onChange={(value) => {
-                setName(value);
-                setNameError("");
-              }}
-              onSubmit={next}
-              error={nameError}
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="5"
-            aria-hidden={slider !== 5}
-            inert={slider !== 5}
-          >
-            <FormSlide
-              kind="email"
-              value={email}
-              onChange={(value) => {
-                setEmail(value);
-                setEmailError("");
-              }}
-              onSubmit={next}
-              error={emailError}
-            />
-          </SwiperSlide>
-          <SwiperSlide
-            className="h-full"
-            data-slide-index="6"
-            aria-hidden={slider !== 6}
-            inert={slider !== 6}
-          >
-            <CompletionSlide />
-          </SwiperSlide>
-        </Swiper>
+            <OrbImage />
+          </div>
 
-        <div className="flex flex-col px-6 pb-10">{renderButton()}</div>
-      </section>
-    </main>
+          <Swiper
+            className="relative z-1 min-h-0 h-full w-full flex-1"
+            modules={[EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            speed={650}
+            slidesPerView={1}
+            allowTouchMove={false}
+            preventInteractionOnTransition
+            resistanceRatio={0.2}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => {
+              setSlider(swiper.activeIndex);
+            }}
+          >
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="0"
+              aria-hidden={slider !== 0}
+              inert={slider !== 0}
+            >
+              <IntroSlide />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="1"
+              aria-hidden={slider !== 1}
+              inert={slider !== 1}
+            >
+              <WalkthroughSlide index={0} active={slider === 1} />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="2"
+              aria-hidden={slider !== 2}
+              inert={slider !== 2}
+            >
+              <WalkthroughSlide index={1} active={slider === 2} />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="3"
+              aria-hidden={slider !== 3}
+              inert={slider !== 3}
+            >
+              <WalkthroughSlide index={2} active={slider === 3} />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="4"
+              aria-hidden={slider !== 4}
+              inert={slider !== 4}
+            >
+              <FormSlide
+                kind="name"
+                value={name}
+                onChange={(value) => {
+                  setName(value);
+                  setNameError("");
+                }}
+                onSubmit={next}
+                error={nameError}
+              />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="5"
+              aria-hidden={slider !== 5}
+              inert={slider !== 5}
+            >
+              <FormSlide
+                kind="email"
+                value={email}
+                onChange={(value) => {
+                  setEmail(value);
+                  setEmailError("");
+                }}
+                onSubmit={next}
+                error={emailError}
+              />
+            </SwiperSlide>
+            <SwiperSlide
+              className="h-full"
+              data-slide-index="6"
+              aria-hidden={slider !== 6}
+              inert={slider !== 6}
+            >
+              <CompletionSlide />
+            </SwiperSlide>
+          </Swiper>
+
+          <div className="relative flex flex-col px-6 pb-10 z-20">
+            {renderButton()}
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

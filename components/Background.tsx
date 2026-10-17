@@ -4,8 +4,8 @@ import Image from "next/image";
 import type { RefObject } from "react";
 
 type Props = {
-  bgIntroRef: RefObject<HTMLDivElement | null>;
-  bgMainRef: RefObject<HTMLDivElement | null>;
+  bgIntroRef?: RefObject<HTMLDivElement | null>;
+  bgMainRef?: RefObject<HTMLDivElement | null>;
 };
 
 export default function Background({ bgIntroRef, bgMainRef }: Props) {

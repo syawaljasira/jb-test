@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { PPAgrandir, Bagoss, Sohne } from "@/fonts";
+import MainContextProvider from "@/context/MainContext";
 
 import "./globals.css";
-import MainContextProvider from "@/context/MainContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
