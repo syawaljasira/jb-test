@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PPAgrandir, Bagoss, Sohne } from "@/fonts";
-import MainContextProvider from "@/context/MainContext";
 
 import "./globals.css";
 
@@ -16,7 +15,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${PPAgrandir.variable} ${Bagoss.variable} ${Sohne.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans overflow-hidden">
-        <MainContextProvider>{children}</MainContextProvider>
+        {children}
       </body>
     </html>
   );

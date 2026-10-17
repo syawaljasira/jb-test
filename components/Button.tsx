@@ -1,6 +1,10 @@
-import React, { ComponentPropsWithoutRef, ReactNode } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  ComponentPropsWithoutRef,
+  ReactNode,
+} from "react";
 
-interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
@@ -8,7 +12,7 @@ export const ButtonPrimary = ({ children, ...otherProps }: ButtonProps) => {
   return (
     <button
       type="button"
-      className="w-auto bg-primary text-dark px-6 py-4.75 rounded-[19px] font-sans text-base cursor-pointer"
+      className="w-auto bg-primary text-dark px-6 py-4.75 rounded-[19px] font-sans text-base cursor-pointer touch-manipulation pointer-events-auto hover:bg-light"
       {...otherProps}
     >
       {children}

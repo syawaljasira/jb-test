@@ -53,6 +53,7 @@ export default function OrbImage() {
           height={Orb.height}
           draggable={false}
           className="h-full w-full object-cover relative"
+          loading="eager"
         />
 
         <div

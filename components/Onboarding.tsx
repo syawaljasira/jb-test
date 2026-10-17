@@ -154,7 +154,7 @@ const Onboarding = () => {
     <>
       <main
         ref={rootRef}
-        className="w-full relative flex flex-col min-h-screen max-w-112.5 mx-auto"
+        className="w-full isolate relative flex flex-col min-h-screen max-w-112.5 mx-auto"
       >
         <Background bgIntroRef={bgIntroRef} bgMainRef={bgMainRef} />
         <Header previous={previous} restart={restart} />
