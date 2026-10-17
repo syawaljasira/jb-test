@@ -4,15 +4,19 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
+import { Lottie } from "lottie-react";
 
 import { HOME_FEATURES } from "@/lib/constants";
 import Orb from "@/assets/orb.png";
 import { useMainContext } from "@/lib/hooks";
+import orbLottie from "@/assets/JB2G_Lottie.json";
 
 gsap.registerPlugin(useGSAP);
 
 export default function OrbImage() {
+  const rootRef = useRef<HTMLDivElement>(null);
   const featureRef = useRef<HTMLDivElement>(null);
+  const lottieRef = useRef<HTMLDivElement>(null);
   const { slider } = useMainContext();
 
   useGSAP(
@@ -24,23 +28,46 @@ export default function OrbImage() {
         overwrite: "auto",
         delay: slider > 0 ? 0 : 0.6,
       });
+
+      gsap.to(lottieRef.current, {
+        autoAlpha: slider > 3 ? 1 : 0,
+        opacity: slider > 3 ? 1 : 0,
+        duration: 0.8,
+        ease: "power2.inOut",
+        overwrite: "auto",
+      });
     },
     {
-      scope: featureRef,
+      scope: rootRef,
       dependencies: [slider],
     },
   );
 
   return (
-    <div className={`w-full h-full`} aria-hidden="true">
-      <Image
-        src={Orb}
-        alt="Orb"
-        width={Orb.width}
-        height={Orb.height}
-        draggable={false}
-        className="h-full w-full object-cover"
-      />
+    <div ref={rootRef} className={`w-full h-full`} aria-hidden="true">
+      <div className="relative">
+        <Image
+          src={Orb}
+          alt="Orb"
+          width={Orb.width}
+          height={Orb.height}
+          draggable={false}
+          className="h-full w-full object-cover relative"
+        />
+
+        <div
+          ref={lottieRef}
+          className="absolute absolute-center z-10 opacity-0"
+        >
+          <Lottie
+            src={orbLottie}
+            autoplay
+            loop
+            style={{ width: 32, height: 32 }}
+            speed={1.4}
+          />
+        </div>
+      </div>
 
       <div
         ref={featureRef}

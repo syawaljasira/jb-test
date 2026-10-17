@@ -121,6 +121,7 @@ const Onboarding = () => {
   useGSAP(
     () => {
       const isStarted = slider > 0;
+      const formStarted = slider > 3;
 
       const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -130,7 +131,7 @@ const Onboarding = () => {
 
       // Orb resize
       gsap.to(orbRef.current, {
-        width: isStarted ? "36.66%" : "70%",
+        width: formStarted ? 24 : isStarted ? "36.66%" : "70%",
         duration,
         ease: "power3.inOut",
         overwrite: "auto",
