@@ -10,7 +10,7 @@ import gsap from "gsap";
 import WalkthroughSlide from "./Slides/WalkthroughSlide";
 import { useMainContext } from "@/lib/hooks";
 import IntroSlide from "./Slides/IntroSlide";
-import { ButtonPrimary } from "./Button";
+import { ButtonLight, ButtonOutline, ButtonPrimary } from "./Button";
 import Background from "./Background";
 import OrbImage from "./OrbImage";
 import Header from "./Header";
@@ -58,6 +58,25 @@ const Onboarding = () => {
   function restart() {
     swiperRef.current?.slideTo(0);
   }
+
+  const buttonLabel =
+    slider === 0
+      ? "Get a reality check"
+      : slider === 3
+        ? "Get started"
+        : "Continue";
+
+  const renderButton = () => {
+    if (slider === 0) {
+      return <ButtonPrimary onClick={next}>{buttonLabel}</ButtonPrimary>;
+    }
+
+    if (slider === 3) {
+      return <ButtonLight onClick={next}>{buttonLabel}</ButtonLight>;
+    }
+
+    return <ButtonOutline onClick={next}>{buttonLabel}</ButtonOutline>;
+  };
 
   useGSAP(
     () => {
@@ -154,11 +173,7 @@ const Onboarding = () => {
           </SwiperSlide>
         </Swiper>
 
-        <div className="flex flex-col px-6 pb-10">
-          <ButtonPrimary onClick={slider === LAST_INDEX ? restart : next}>
-            Get a reality check
-          </ButtonPrimary>
-        </div>
+        <div className="flex flex-col px-6 pb-10">{renderButton()}</div>
       </section>
     </main>
   );
