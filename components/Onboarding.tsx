@@ -7,10 +7,12 @@ import { A11y, EffectFade } from "swiper/modules";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-import WalkthroughSlide from "./Slides/WalkthroughSlide";
-import { useMainContext } from "@/lib/hooks";
-import IntroSlide from "./Slides/IntroSlide";
 import { ButtonLight, ButtonOutline, ButtonPrimary } from "./Button";
+import { CompletionSlide } from "./Slides/CompletionSlide";
+import WalkthroughSlide from "./Slides/WalkthroughSlide";
+import { FormSlide } from "./Slides/FormSlide";
+import IntroSlide from "./Slides/IntroSlide";
+import { useMainContext } from "@/lib/hooks";
 import Background from "./Background";
 import OrbImage from "./OrbImage";
 import Header from "./Header";
@@ -23,7 +25,18 @@ gsap.registerPlugin(useGSAP);
 const LAST_INDEX = 6;
 
 const Onboarding = () => {
-  const { slider, setSlider } = useMainContext();
+  const {
+    slider,
+    name,
+    email,
+    nameError,
+    emailError,
+    setSlider,
+    setName,
+    setEmail,
+    setNameError,
+    setEmailError,
+  } = useMainContext();
 
   const rootRef = useRef<HTMLElement>(null);
   const bgIntroRef = useRef<HTMLDivElement>(null);
@@ -45,6 +58,24 @@ const Onboarding = () => {
   function next() {
     const index = swiperRef.current?.activeIndex ?? slider;
 
+    if (index === 4) {
+      if (name.trim().length < 3) {
+        setNameError("Enter a name with at least 3 characters.");
+        document.getElementById("name-input")?.focus();
+        return;
+      }
+      setNameError("");
+    }
+
+    if (index === 5) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+        setEmailError("Enter a valid email address.");
+        document.getElementById("email-input")?.focus();
+        return;
+      }
+      setEmailError("");
+    }
+
     if (index < LAST_INDEX) {
       swiperRef.current?.slideTo(index + 1);
     }
@@ -56,6 +87,11 @@ const Onboarding = () => {
   }
 
   function restart() {
+    setName("");
+    setEmail("");
+    setNameError("");
+    setEmailError("");
+
     swiperRef.current?.slideTo(0);
   }
 
@@ -71,8 +107,12 @@ const Onboarding = () => {
       return <ButtonPrimary onClick={next}>{buttonLabel}</ButtonPrimary>;
     }
 
-    if (slider === 3) {
-      return <ButtonLight onClick={next}>{buttonLabel}</ButtonLight>;
+    if (slider === 3 || slider === LAST_INDEX) {
+      return (
+        <ButtonLight onClick={slider === LAST_INDEX ? restart : next}>
+          {buttonLabel}
+        </ButtonLight>
+      );
     }
 
     return <ButtonOutline onClick={next}>{buttonLabel}</ButtonOutline>;
@@ -170,6 +210,48 @@ const Onboarding = () => {
             inert={slider !== 3}
           >
             <WalkthroughSlide index={2} active={slider === 3} />
+          </SwiperSlide>
+          <SwiperSlide
+            className="h-full"
+            data-slide-index="4"
+            aria-hidden={slider !== 4}
+            inert={slider !== 4}
+          >
+            <FormSlide
+              kind="name"
+              value={name}
+              onChange={(value) => {
+                setName(value);
+                setNameError("");
+              }}
+              onSubmit={next}
+              error={nameError}
+            />
+          </SwiperSlide>
+          <SwiperSlide
+            className="h-full"
+            data-slide-index="5"
+            aria-hidden={slider !== 5}
+            inert={slider !== 5}
+          >
+            <FormSlide
+              kind="email"
+              value={email}
+              onChange={(value) => {
+                setEmail(value);
+                setEmailError("");
+              }}
+              onSubmit={next}
+              error={emailError}
+            />
+          </SwiperSlide>
+          <SwiperSlide
+            className="h-full"
+            data-slide-index="6"
+            aria-hidden={slider !== 6}
+            inert={slider !== 6}
+          >
+            <CompletionSlide />
           </SwiperSlide>
         </Swiper>
 
