@@ -1,7 +1,7 @@
 "use client";
 
 import type { Swiper as SwiperInstance } from "swiper";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade } from "swiper/modules";
 import { useGSAP } from "@gsap/react";
@@ -43,6 +43,8 @@ const Onboarding = () => {
   const bgMainRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperInstance | null>(null);
   const orbRef = useRef<HTMLDivElement>(null);
+
+  const [debug, setDebug] = useState("Waiting for touch");
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -93,6 +95,8 @@ const Onboarding = () => {
     setEmailError("");
 
     swiperRef.current?.slideTo(0);
+
+    setDebug("Click detected!");
   }
 
   const buttonLabel =
@@ -132,6 +136,7 @@ const Onboarding = () => {
       // Orb resize
       gsap.to(orbRef.current, {
         width: formStarted ? 24 : isStarted ? "36.66%" : "70%",
+        paddingBottom: isStarted ? 20 : 0,
         duration,
         ease: "power3.inOut",
         overwrite: "auto",
@@ -159,13 +164,15 @@ const Onboarding = () => {
         <Background bgIntroRef={bgIntroRef} bgMainRef={bgMainRef} />
         <Header previous={previous} restart={restart} />
 
+        <p className="mt-3 text-center text-sm text-white">{debug}</p>
+
         <section
-          className="relative isolate flex h-full flex-col overflow-hidden pt-[15vh]"
+          className="relative isolate flex h-full flex-col overflow-hidden pt-[12vh]"
           aria-label="Onboarding Juicebox"
         >
           <div
             ref={orbRef}
-            className="relative flex mx-auto w-7/10 lg:max-w-55 h-auto"
+            className={`relative flex mx-auto w-7/10 lg:max-w-55 h-auto`}
           >
             <OrbImage />
           </div>

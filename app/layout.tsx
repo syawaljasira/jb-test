@@ -13,8 +13,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${PPAgrandir.variable} ${Bagoss.variable} ${Sohne.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans overflow-hidden">
+      <body
+        className="min-h-full flex flex-col font-sans overflow-hidden"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
