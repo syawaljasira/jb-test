@@ -135,7 +135,7 @@ export default function ScrollRevealText({ text, active, slideNumber }: Props) {
       {/* Scrollable interaction layer */}
       <div
         ref={viewportRef}
-        className="scrollbar-none absolute inset-0 z-2 overflow-y-auto overscroll-contain touch-pan-y [&::-webkit-scrollbar]:hidden"
+        className="scrollbar-none absolute inset-0 -mt-10 z-2 overflow-y-auto overscroll-contain touch-pan-y [&::-webkit-scrollbar]:hidden"
         role="region"
         aria-label={`Slide ${slideNumber} text reveal`}
         tabIndex={active ? 0 : -1}
