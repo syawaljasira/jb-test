@@ -71,7 +71,7 @@ const Onboarding = () => {
 
       // Orb resize
       gsap.to(orbRef.current, {
-        width: isStarted ? "40%" : "75%",
+        width: isStarted ? "36.66%" : "70%",
         duration,
         ease: "power3.inOut",
         overwrite: "auto",
@@ -99,7 +99,7 @@ const Onboarding = () => {
         className="relative isolate flex h-full flex-col overflow-hidden gap-8 pt-36"
         aria-label="Onboarding Juicebox"
       >
-        <div ref={orbRef} className="relative flex mx-auto w-9/12 h-auto">
+        <div ref={orbRef} className="relative flex mx-auto w-7/10 h-auto">
           <OrbImage />
         </div>
 
