@@ -12,6 +12,15 @@
   --font-sans: var(--font-sohne);
   --font-pp-agrandir: var(--font-pp-agrandir);
   --font-bagoss: var(--font-bagoss);
+
+  --color-primary: #cdaaff;
+  --color-dark: #0c0d10;
+  --color-light: #fafafa;
+
+  --text-h2: 28px;
+  --text-h2--line-height: 1.2;
+  --text-h4: 22px;
+  --text-h4--line-height: 1.25;
 }
 
 @media (prefers-color-scheme: dark) {
