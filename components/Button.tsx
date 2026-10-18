@@ -20,7 +20,7 @@ export const ButtonOutline = ({ children, ...otherProps }: ButtonProps) => {
   return (
     <button
       type="button"
-      className="w-auto bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-dark px-6 py-4.75 rounded-[19px] font-sans text-base cursor-pointer"
+      className="w-auto bg-transparent border-2 border-light text-light hover:bg-light hover:text-dark px-6 py-4.75 rounded-[19px] font-sans text-base cursor-pointer"
       {...otherProps}
     >
       {children}
