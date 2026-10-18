@@ -16,6 +16,7 @@ import { useMainContext } from "@/lib/hooks";
 import Background from "./Background";
 import OrbImage from "./OrbImage";
 import Header from "./Header";
+import { validation } from "@/lib/utils";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -61,7 +62,7 @@ const Onboarding = () => {
     const index = swiperRef.current?.activeIndex ?? slider;
 
     if (index === 4) {
-      if (name.trim().length < 3) {
+      if (validation({ value: name, option: "name" })) {
         setNameError("Enter a name with at least 3 characters.");
         document.getElementById("name-input")?.focus();
         return;
@@ -70,7 +71,7 @@ const Onboarding = () => {
     }
 
     if (index === 5) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      if (validation({ value: email, option: "email" })) {
         setEmailError("Enter a valid email address.");
         document.getElementById("email-input")?.focus();
         return;
